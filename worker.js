@@ -1,11 +1,11 @@
-import { getAssetFromKV } from "@cloudflare/kv-asset-handler";
+import { getAssetFromKV } from '@cloudflare/kv-asset-handler'
 
-export default {
-    async fetch(event) {
-        try {
-            return await getAssetFromKV(event);
-        } catch {
-            return new Response("404 Not Found", { status: 404 });
-        }
-    }
-};
+addEventListener('fetch', event => {
+  try {
+    event.respondWith(getAssetFromKV(event))
+  } catch (e) {
+    event.respondWith(
+      new Response('404 Not Found', { status: 404 })
+    )
+  }
+})
